@@ -38,6 +38,8 @@ def logout_view(request):
 
 def register(request):
     if request.method == "POST":
+        first_name = request.POST["firstname"]
+        last_name = request.POST["lastname"]
         username = request.POST["username"]
         email = request.POST["email"]
 
@@ -51,7 +53,12 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            # user = User.objects.create_user(username, email, password, first_name, last_name)
+            user = User.objects.create_user(username=username,
+                                            first_name=first_name, 
+                                            last_name=last_name, 
+                                            email=email, 
+                                            password=password)
             user.save()
         except IntegrityError:
             return render(request, "network/register.html", {
@@ -61,3 +68,9 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+def posts(request):
+    pass
+
+def following(request):
+    pass
