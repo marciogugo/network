@@ -21,13 +21,13 @@ body {
     text-align: center;
 }
 
-.item-content {
+.post-content {
     margin-top: 10px;
     font-weight: normal;
     font-size: normal;
 }
 
-.item-comments{
+.post-comments{
     display: flex;
     align-content: flex-end;
 }

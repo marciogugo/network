@@ -1,4 +1,5 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 <title>{% block title %}Network - Register{% endblock title %}</title>
 
@@ -10,6 +11,20 @@
         <div class="form-items">
             <form action="{% url 'register' %}" method="POST" name="RegisterForm">
                 {% csrf_token %}
+                <div class="col-sm-4">
+                    <div class="mb-3">
+                        <label for="formFile" class="col-sm2 col-form-label col-form-label-sm">Image</label>
+                        {{ form.registerImageFile }}
+                    </div>
+                    <div class="mb-3">
+                        <img id="frame" src="" class="rounded-circle"/>
+                        <br>
+                        <button onclick="clearImage()" id="buttonID" class="btn btn-primary mt-3" >Reset image</button>
+                    </div>
+                    <script>
+                        document.getElementById("buttonID").style.display=image_uploaded?"":"none";
+                    </script>
+                    </div>
                 <div class="mb-3">
                     {{ form.registerFirstName }}
                 </div>
@@ -43,3 +58,7 @@
         </div>
     </div>
 {% endblock body %}
+
+{% block script %}
+    <script src="{% static 'network/network.js' %}"></script>
+{% endblock %}

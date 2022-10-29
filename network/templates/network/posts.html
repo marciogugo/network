@@ -1,5 +1,4 @@
 {% extends "network/layout.html" %}
-{% load static %}
 
 {% block body %}
 <div class="form-posts">
@@ -7,13 +6,10 @@
 
     <form action="{% url 'posts' %}" method="POST" id="postForm" name="PostForm" enctype="multipart/form-data">
         {% csrf_token %}
-
-        <div class="col-sm-10">
-            <label for="postContent" class="col-sm2 col-form-label col-form-label-sm">New Post</label>
-            {{ form.postContent }}
-        </div>
-
         <div class="row">
+            <div class="col-md-4">
+                  {{ item.post_content}}
+            </div>
             {% for post in posts %}
             <div class="col-md-4">
                 {% for item in post %}
@@ -21,21 +17,16 @@
                         <label for="listingContent" class="col-sm2 col-form-label col-form-label-sm">Content:</label>
                         {{ item.post_content }}
                     </div>
-                {% endfor %}
-            </div>
+                {% endfor %} <!-- for listing in listings --!>
+            </div> <!-- /col-md-4 -->
             {% empty %}
                 <div class="error-message">Sorry, no posts found.</div>
             {% endfor %}
-        </div>
+        </div><!-- /row -->
         {% if message %}
             <div class="error-message">{{ message }}</div>
         {% else %}
             <div class="error-message"></div>
         {% endif %}
     </form>
-</div>
-{% endblock %}
-
-{% block script %}
-    <script src="{% static 'network/network.js' %}"></script>
-{% endblock %}
+</div>{% endblock %}

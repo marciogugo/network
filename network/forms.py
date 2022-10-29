@@ -3,10 +3,21 @@ from attr import attrs
 from django import forms
 from django.conf import settings
 
-from network.models import Post
+#from network.models import Post
 from django.forms.models import inlineformset_factory
 
 class RegisterForm(forms.Form):
+    registerImageFile = forms.ImageField(
+        widget=forms.ClearableFileInput(attrs={
+            'id':'imageFile',
+            'class':'form-control',
+            'type': 'file',
+            'onchange':'preview()',
+            'required':'false',
+        }),
+        required=False,
+    )
+
     registerFirstName = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control',
