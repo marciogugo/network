@@ -193,3 +193,11 @@ nav {
     text-align: left;
     transition: all 0.4s ease;
 }
+
+.rounded-circle {
+    margin-left: 7em;
+    display: flex;
+    width: 50%;
+    background-color: lightblue;
+}
+

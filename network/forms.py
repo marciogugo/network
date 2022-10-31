@@ -9,7 +9,7 @@ from django.forms.models import inlineformset_factory
 class RegisterForm(forms.Form):
     registerImageFile = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={
-            'id':'imageFile',
+            'id':'registerImageFile',
             'class':'form-control',
             'type': 'file',
             'onchange':'preview()',
@@ -20,6 +20,7 @@ class RegisterForm(forms.Form):
 
     registerFirstName = forms.CharField(
         widget=forms.TextInput(attrs={
+            'id':'registerFirstName',
             'class': 'form-control',
             'placeholder': 'First Name',
             'autofocus':'',
@@ -30,6 +31,7 @@ class RegisterForm(forms.Form):
 
     registerLastName = forms.CharField(
         widget=forms.TextInput(attrs={
+            'id':'registerLastName',
             'class': 'form-control',
             'placeholder': 'Last Name',
             'autofocus':'',
@@ -40,6 +42,7 @@ class RegisterForm(forms.Form):
 
     registerUsername = forms.CharField(
         widget=forms.TextInput(attrs={
+            'id':'registerUsername',
             'class': 'form-control',
             'placeholder': 'Username',
             'autofocus':'',
@@ -49,6 +52,7 @@ class RegisterForm(forms.Form):
 
     registerEmail = forms.EmailField(
         widget=forms.TextInput(attrs={
+            'id':'registerEmail',
             'class': 'form-control',
             'placeholder': 'E-mail',
             'autofocus':'',
@@ -58,6 +62,7 @@ class RegisterForm(forms.Form):
 
     registerPassword = forms.CharField(
         widget=forms.PasswordInput(attrs={
+            'id':'registerPassword',
             'class':'form-control',
             'placeholder': 'Password',
             'autofocus':'',
@@ -67,6 +72,7 @@ class RegisterForm(forms.Form):
 
     registerConfPassword = forms.CharField(
         widget=forms.PasswordInput(attrs={
+            'id':'registerConfPassword',
             'class':'form-control',
             'placeholder': 'Confirm Password',
             'autofocus':'',
@@ -84,5 +90,3 @@ class PostForm(forms.Form):
         }),
         required=False,
     )
-
-

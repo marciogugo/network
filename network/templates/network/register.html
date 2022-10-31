@@ -11,20 +11,11 @@
         <div class="form-items">
             <form action="{% url 'register' %}" method="POST" name="RegisterForm">
                 {% csrf_token %}
-                <div class="col-sm-4">
-                    <div class="mb-3">
-                        <label for="formFile" class="col-sm2 col-form-label col-form-label-sm">Image</label>
-                        {{ form.registerImageFile }}
-                    </div>
-                    <div class="mb-3">
-                        <img id="frame" src="" class="rounded-circle"/>
-                        <br>
-                        <button onclick="clearImage()" id="buttonID" class="btn btn-primary mt-3" >Reset image</button>
-                    </div>
-                    <script>
-                        document.getElementById("buttonID").style.display=image_uploaded?"":"none";
-                    </script>
-                    </div>
+                <div class="mb-3">
+                    <i class="material-icons" id="search-camera">photo_camera</i>
+                    <img id="imageFile" src="static/network/acinqueterre.jpg" alt="photo" class="rounded-circle" width="54" height="154"> 
+                    {{ form.registerImageFile }}
+                </div>
                 <div class="mb-3">
                     {{ form.registerFirstName }}
                 </div>
