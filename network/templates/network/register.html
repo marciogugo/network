@@ -11,11 +11,37 @@
         <div class="form-items">
             <form action="{% url 'register' %}" method="POST" name="RegisterForm">
                 {% csrf_token %}
-                <div class="mb-3">
-                    <i class="material-icons" id="search-camera">photo_camera</i>
-                    <img id="imageFile" src="static/network/acinqueterre.jpg" alt="photo" class="rounded-circle" width="54" height="154"> 
-                    {{ form.registerImageFile }}
+
+                <div class="col-md-4"> 
+                    <span class="btn btn-info" style="display:none" ><i class="glyphicon glyphicon-plus"> </i> Browse
+                        <input id="i" type="file" style="position:relative;overflow:hidden" name="UserImage" accept="image/png, image/jpeg" />
+                    </span>
                 </div>
+
+                <div id="fileChooser">
+                    <img id="defaultImageFile" style="display:''" accept="image/jpeg, image/png, image/jpg" src="media/default/user.png" class="rounded-circle btn btn-default btn-file" width="54" height="154">
+                    <img type="file" id="imageFile" style="display:none" src="media/default/user.png" class="rounded-circle btn btn-default btn-file" width="54" height="154"> 
+                </div>
+
+                <div id="imageName" style="display:none"></div>
+
+                <hr>
+                
+                {% comment %} <div class="mb-3">
+                    <img type="file" id="imageFile" src="media/default/user.png" class="rounded-circle btn btn-default btn-file" width="54" height="154"> 
+                    <img type="file" id="defaultImageFile" accept="image/jpeg, image/png, image/jpg" src="media/default/user.png" class="rounded-circle btn btn-default btn-file" width="54" height="154"> 
+
+                    <input type="file" id="image-input" title=" nada " accept="image/jpeg, image/png, image/jpg">
+
+                    <-- <span class="btn btn-default btn-file">
+                        Choose image <input type="file" id="defaultImageFile1">
+                    </span> --/>
+
+                    <-- {{ form.registerImageFile }} --/>
+                </div> {% endcomment %}
+
+                {{ form.registerImageFile }}
+
                 <div class="mb-3">
                     {{ form.registerFirstName }}
                 </div>

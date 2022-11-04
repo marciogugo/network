@@ -7,16 +7,24 @@ from django.conf import settings
 from django.forms.models import inlineformset_factory
 
 class RegisterForm(forms.Form):
-    registerImageFile = forms.ImageField(
-        widget=forms.ClearableFileInput(attrs={
-            'id':'registerImageFile',
-            'class':'form-control',
-            'type': 'file',
-            'onchange':'preview()',
-            'required':'false',
-        }),
-        required=False,
-    )
+    # registerImageFile = forms.CharField(
+    #     widget=forms.TextInput(attrs={
+    #         'id':'registerImageFile',
+    #         'class': 'form-control',
+    #         'display':'none',
+    #     }),
+    # )
+
+    # aregisterImageFile = forms.ImageField(
+    #     widget=forms.ClearableFileInput(attrs={
+    #         'id':'registerImageFile',
+    #         'class':'form-control',
+    #         'type': 'file',
+    #         'required':'false',
+    #         'display':'none',
+    #     }),
+    #     required=False,
+    # )
 
     registerFirstName = forms.CharField(
         widget=forms.TextInput(attrs={

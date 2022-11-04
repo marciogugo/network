@@ -48,6 +48,8 @@ def register(request):
                 "message": "Fill out all the requested fields."
             })
         else:
+            user_image = request.FILES['registerImageFile']
+            print(user_image)
             first_name = request.POST['registerFirstName']
             last_name = request.POST['registerLastName']
             username = request.POST["registerUsername"]
@@ -70,7 +72,8 @@ def register(request):
                                                 first_name=first_name, 
                                                 last_name=last_name, 
                                                 email=email, 
-                                                password=password)
+                                                password=password,
+                                                user_image=user_image)
                 user.save()
                 request.session['user_id'] = user.id
             except IntegrityError:
