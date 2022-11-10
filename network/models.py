@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    user_image = models.ImageField()
+    user_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return f"First name: {self.first_name} Last name: {self.last_name} E-mail: {self.email}"

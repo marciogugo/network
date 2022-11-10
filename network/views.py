@@ -41,15 +41,14 @@ def register(request):
     form = RegisterForm()
 
     if request.method == "POST":
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
 
         if not form.is_valid():
             return render(request, "network/register.html", {
                 "message": "Fill out all the requested fields."
             })
         else:
-            user_image = request.FILES['registerImageFile']
-            print(user_image)
+            user_image = request.FILES['registerImage']
             first_name = request.POST['registerFirstName']
             last_name = request.POST['registerLastName']
             username = request.POST["registerUsername"]
