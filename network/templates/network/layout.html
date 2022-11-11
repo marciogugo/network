@@ -33,8 +33,14 @@
                     </nav>
                 </div>
                 {% if user.is_authenticated %}
+                <div class="div-user-image">
+                    <a class="nav-user-logged">
+                    <img class="rounded-circle" width="24" height="24" src='{{ user.user_image.url }}'/><a>
+                    <a class="nav-user-logged">{{ user.username }}<strong><a>
+                </div>
                 <div class="div-user-logged">
-                    <a class="nav-user-logged">Hello, {{ user.username }}<strong><a>
+                    {% comment %} <img class="rounded-circle" width="24" height="24" src='{{ user.user_image.url }}'/> {% endcomment %}
+                    {% comment %} <a class="nav-user-logged">{{ user.username }}<strong><a> {% endcomment %}
                 </div>
                 {% endif %}
             </div>

@@ -1,18 +1,19 @@
 from datetime import date
+
 from attr import attrs
 from django import forms
 from django.conf import settings
 
 #from network.models import Post
-from django.forms.models import inlineformset_factory
 
 class RegisterForm(forms.Form):
-    registerImage = forms.ImageField(
+    registerImageFile = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={
-            'id':'registerImage',
+            'id':'registerImageFile',
             'class':'form-control',
             'type': 'file',
             'required':'false',
+            'hidden': 'true',
         }),
         required=False,
     )

@@ -48,7 +48,7 @@ def register(request):
                 "message": "Fill out all the requested fields."
             })
         else:
-            user_image = request.FILES['registerImage']
+            user_image = request.FILES['registerImageFile']
             first_name = request.POST['registerFirstName']
             last_name = request.POST['registerLastName']
             username = request.POST["registerUsername"]

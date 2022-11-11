@@ -76,6 +76,11 @@ body {
     font-size: 15px;
 }
 
+.div-user-image {
+    width: 10%;
+    display: ;
+}
+
 .header {
     justify-content: space-between;
     background-color: #6666f1;   

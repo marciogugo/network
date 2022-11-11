@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loaded()
         }
     }
+
 });
 
 function loaded() {
@@ -26,14 +27,9 @@ function imageChange(e) {
         registerImageFile = document.querySelector('#registerImageFile')
         registerImageFile.src = `${uploaded_image}`;
 
-        registerImage = document.querySelector('#registerImage')
-        registerImage.src = `${uploaded_image}`;
-
         document.querySelector('#imageFile').style.display = '';
         document.querySelector('#defaultImageFile').style.display = 'none';
     })
 
-    //sessionStorage.setItem('registerImageFile1', document.querySelector('#registerImageFile').files[0])
     reader.readAsDataURL(document.querySelector('#registerImageFile').files[0]);
-    // reader.readAsDataURL(document.querySelector('#registerImage').files[0]);
 }

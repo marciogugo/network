@@ -12,14 +12,13 @@
             <form action="{% url 'register' %}" method="POST" name="RegisterForm" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <div class="col-md-4"> 
+                {% comment %} <div class="col-md-4"> 
                     <span class="btn btn-info" style="display:none" ><i class="glyphicon glyphicon-plus"> </i> Browse
-                        <input id="registerImageFile" type="file" style="position:relative;overflow:hidden" accept="image/png, image/jpeg, image/jpg" />
-                        {% comment %} <input id="i" foi trocado por registerImageFile type="file" style="position:relative;overflow:hidden" accept="image/png, image/jpeg" /> {% endcomment %}
                     </span>
-                </div>
+                </div> {% endcomment %}
 
                 <div id="fileChooser">
+                    {{ form.registerImageFile }}
                     <img id="defaultImageFile" style="display:''" accept="image/jpeg, image/png, image/jpg" src="media/default/user.png" class="rounded-circle btn btn-default btn-file" width="54" height="154">
                     <img type="file" id="imageFile" style="display:none" class="rounded-circle btn btn-default btn-file form-control" width="54" height="154"> 
                 </div>
@@ -28,12 +27,6 @@
 
                 <hr>
                 
-                <div class="mb-3" style="display:none">
-                    <span class="btn btn-info">
-                        {{ form.registerImage }}
-                    </span>
-                </div>
-
                 <div class="mb-3">
                     {{ form.registerFirstName }}
                 </div>
