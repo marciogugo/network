@@ -13,25 +13,27 @@
             {{ form.postContent }}
         </div>
 
-        <div class="row">
-            {% for post in posts %}
-            <div class="col-md-4">
-                {% for item in post %}
-                    <div class="col-sm-10">
-                        <label for="listingContent" class="col-sm2 col-form-label col-form-label-sm">Content:</label>
-                        {{ item.post_content }}
-                    </div>
+        <div id="posts-view" style='display:none'>
+            <div class="row">
+                {% for post in posts %}
+                <div class="col-md-4">
+                    {% for item in post %}
+                        <div class="col-sm-10">
+                            <label for="postContent" class="col-sm2 col-form-label col-form-label-sm">Content:</label>
+                            {{ item.post_content }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% empty %}
+                    <div class="error-message">Sorry, no posts found.</div>
                 {% endfor %}
             </div>
-            {% empty %}
-                <div class="error-message">Sorry, no posts found.</div>
-            {% endfor %}
-        </div>
-        {% if message %}
-            <div class="error-message">{{ message }}</div>
-        {% else %}
-            <div class="error-message"></div>
-        {% endif %}
+            {% if message %}
+                <div class="error-message">{{ message }}</div>
+            {% else %}
+                <div class="error-message"></div>
+            {% endif %}
+            </div>
     </form>
 </div>
 {% endblock %}

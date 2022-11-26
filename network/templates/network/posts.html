@@ -1,4 +1,7 @@
 {% extends "network/layout.html" %}
+{% load columns %}
+{% load static %}
+{% load templates %}
 
 {% block body %}
 <div class="form-posts">
@@ -6,23 +9,48 @@
 
     <form action="{% url 'posts' %}" method="POST" id="postForm" name="PostForm" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-md-4">
-                  {{ item.post_content}}
+            <div class="col-md-6">
+                <div class="col-sm-10 post-new-content vl">
+                    <img class="rounded-circle" id="userImage" src="media/{{ userImage }}" width="54" height="54">
+                    <a class="a-post"></a>
+                    {{ form.postContent }}
+                </div>
+                <div class="post-bar vl">
+                    {% comment %} <span class="material-icons post-icon" id="speaker_notes">speaker_notes</span> {% endcomment %}
+                    <input class="btn btn-primary mt-2 post-submit-btn" type="submit" id="buttonSubmit" value="Post">
+                </div>
             </div>
+
+            <br>
+
             {% for post in posts %}
-            <div class="col-md-4">
-                {% for item in post %}
-                    <div class="col-sm-10">
-                        <label for="listingContent" class="col-sm2 col-form-label col-form-label-sm">Content:</label>
-                        {{ item.post_content }}
+            <div class="col-md-6 post-content">
+                <div class="col-sm-10 post-header vl">
+                    <img class="rounded-circle" id="userImage" src="media/{{ userImage }}" width="54" height="54">
+                    <div class="post-username">
+                        {{ userName }} | {{ post.post_date }} 
                     </div>
-                {% endfor %} <!-- for listing in listings --!>
+                </div>
+
+                <div class='post-new-content vl'>
+                    <a class="a-post"></a>
+                    <a class="a-post"></a>
+                    <a class="a-post"></a>
+                    <a class="a-post"></a>
+                    <a class="a-post"></a>
+                    <textarea class="form-control form-control-sm post-text-area" id="post-content" disabled="True" rows="3" cols="90">{{ post.post_content }}</textarea>
+                </div>
+                
+                <div class="post-edit vl">
+                    <br>
+                    <btn class="btn btn-primary post-bt-thread">Edit</btn>
+                    <span class="material-icons post-icon" id="favorite">favorite</span>
+                    <button type="button" id="button_liked" class="btn btn-outline-white" name="add_liked" onclick=""><span>&#128153;</span></button>
+                </div>
+
             </div> <!-- /col-md-4 -->
-            {% empty %}
-                <div class="error-message">Sorry, no posts found.</div>
             {% endfor %}
-        </div><!-- /row -->
+
         {% if message %}
             <div class="error-message">{{ message }}</div>
         {% else %}

@@ -12,15 +12,10 @@
             <form action="{% url 'register' %}" method="POST" name="RegisterForm" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                {% comment %} <div class="col-md-4"> 
-                    <span class="btn btn-info" style="display:none" ><i class="glyphicon glyphicon-plus"> </i> Browse
-                    </span>
-                </div> {% endcomment %}
-
                 <div id="fileChooser">
                     {{ form.registerImageFile }}
-                    <img id="defaultImageFile" style="display:''" accept="image/jpeg, image/png, image/jpg" src="media/default/user.png" class="rounded-circle btn btn-default btn-file" width="54" height="154">
-                    <img type="file" id="imageFile" style="display:none" class="rounded-circle btn btn-default btn-file form-control" width="54" height="154"> 
+                    <img id="defaultImageFile" style="display:''" accept="image/jpeg, image/png, image/jpg" src="media/default/user.png" class="rounded-circle register-rounded-circle btn btn-default btn-file" width="54" height="154">
+                    <img type="file" id="imageFile" style="display:none" class="rounded-circle register-rounded-circle btn btn-default btn-file form-control" width="54" height="154"> 
                 </div>
 
                 <div id="imageName" style="display:none"></div>
@@ -45,11 +40,13 @@
                 <div class="mb-3">
                     {{ form.registerConfPassword }}
                 </div>
+
                 {% if message %}
-                <div class="error-message">{{ message }}</div>
+                    <div class="error-message">{{ message }}</div>
                 {% else %}
-                <div class="error-message"></div>
+                    <div class="error-message"></div>
                 {% endif %}
+
                 <div class="form-button">
                     <input class="btn btn-primary" type="submit" value="Register">
                 </div>
@@ -62,7 +59,5 @@
 {% endblock body %}
 
 {% block script %}
-    <script src="{% static 'network/network.js' %}">
-        sessionStorage.setItem('registerImageFile1', event.target.files[0])
-    </script>
+    <script src="{% static 'network/register.js' %}"></script>
 {% endblock %}

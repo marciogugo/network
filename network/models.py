@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 class User(AbstractUser):
     user_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
@@ -12,10 +11,12 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     post_id = models.AutoField(primary_key=True)
     post_content = models.TextField(max_length=300)
-    post_date = models.DateTimeField(auto_now=False)
+    post_date = models.DateTimeField(editable=False)
     def __str__(self):
-        return f"User: {self.user.username} Content: {self.post_content}"
+        return f"User: {User.username} Content: {self.post_content}"
 
 class Posts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
     post = models.ForeignKey(Post, on_delete=models.RESTRICT)
+    def __str__(self):
+        return f"User: {User.username} Content: {self.post.post_content}"

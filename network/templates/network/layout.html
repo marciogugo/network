@@ -21,14 +21,14 @@
                 </div>
                 <div class="div-menu">
                     <nav class="nav">
-                        <a class="nav-link" href="{% url 'posts' %}">All Posts</a>
+                        <a class="nav-link" id="allPosts" href="{% url 'posts' %}">All Posts</a>
                         {% if user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'following' %}">Following</a>
+                        <a class="nav-link" id="following" href="{% url 'following' %}">Following</a>
                         {% endif %}
                         {% if user.is_authenticated %}
                             <a class="nav-user" href="{% url 'logout' %}">Log Out | </a>
                         {% else %}
-                            <a class="nav-user" href="{% url 'login' %}">Log In | Register</a>
+                            <a class="nav-user" id="registeredUser" href="{% url 'login' %}">Log In | Register</a>
                         {% endif %}
                     </nav>
                 </div>
@@ -38,15 +38,13 @@
                     <img class="rounded-circle" width="24" height="24" src='{{ user.user_image.url }}'/><a>
                     <a class="nav-user-logged">{{ user.username }}<strong><a>
                 </div>
-                <div class="div-user-logged">
-                    {% comment %} <img class="rounded-circle" width="24" height="24" src='{{ user.user_image.url }}'/> {% endcomment %}
-                    {% comment %} <a class="nav-user-logged">{{ user.username }}<strong><a> {% endcomment %}
-                </div>
                 {% endif %}
             </div>
         </header>
         <hr>
-        {% block body %}
-        {% endblock body %}
+        <div class="container">
+            {% block body %}
+            {% endblock body %}
+        </div>
     </body>
 </html>

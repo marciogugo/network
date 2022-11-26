@@ -9,6 +9,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.vl {
+    border-left: 2px solid #6666f1;
+    /* height: 500px; */
+  }
+
 .form-posts {
     inherits: false;
     margin-left: 20px;
@@ -21,15 +26,11 @@ body {
     text-align: center;
 }
 
-
-
-
-
-
 .btn-file {
     position: relative;
     overflow: hidden;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -52,7 +53,7 @@ body {
     font-size: normal;
 }
 
-.post-comments{
+.post-comments {
     display: flex;
     align-content: flex-end;
 }
@@ -78,7 +79,7 @@ body {
 
 .div-user-image {
     width: 10%;
-    display: ;
+    /* display: flex; */
 }
 
 .header {
@@ -133,15 +134,14 @@ nav {
     font-size: 20px;
     font-weight: 500;
     text-decoration: none;
-    --margin-right: 30px;
-    --width: 50px;
 }
 
 .nav-user-logged {
     display: inline-flex;
-    font-style: italic;
-    color: black;
-    margin-left: 10px;
+    align-items: center;
+    color: white;
+    margin-left: 2em;
+    text-transform: capitalize;
 }    
 
 .nav-watch::after {
@@ -152,9 +152,6 @@ nav {
     width: 15px;
     height: 15px;
     margin-left: 5px;
-    --margin-bottom: 2px;
-    --padding-left:2px;
-    --padding-top:2px;
     background-color: red;
     border-radius: 5px;
 }
@@ -182,6 +179,11 @@ nav {
 .a-title {
     width: 150px;
     margin-right: 10px;
+}
+
+.a-post {
+    width: 20px;
+    /* margin-right: 10px; */
 }
 
 .form-button {
@@ -225,8 +227,61 @@ nav {
 }
 
 .rounded-circle {
+    margin-left: 1em;
+    display: flex;
+    background-color: lightblue;
+}
+
+.register-rounded-circle {
     margin-left: 7em;
     display: flex;
     width: 50%;
     background-color: lightblue;
+}
+
+.post-rounded-circle {
+    display: flex;
+    background-color: lightblue;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+}
+
+.post-username {
+    margin-left: 10px;
+}
+
+.post-submit-button {
+    height: 20px;
+    width: 50px;
+}
+
+.post-icon {
+    margin-top: 20px;
+}
+
+.post-bar {
+    display: grid;
+    margin-right: 95px;
+    justify-items: flex-end;
+    height: 50px;
+}
+
+.post-new-content {
+    display: flex;
+}
+
+.post-new_content
+.post-content {
+    margin-left: 50px;
+}
+
+.post-text-area {
+    margin-left: 1px;
+}
+
+.post-bt-edit {
+    margin-left: 85px;
 }

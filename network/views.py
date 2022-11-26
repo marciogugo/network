@@ -1,10 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.utils import timezone
 
-from .models import User
+from .models import User, Post
 from .forms import PostForm, RegisterForm
 
 
@@ -23,7 +25,8 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            request.session['user_id'] = user.pk
+            return HttpResponseRedirect(reverse("posts"))
         else:
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
@@ -89,8 +92,41 @@ def register(request):
     }
     return render(request, "network/register.html", context=context)
 
+
+@login_required
 def posts(request):
-    return HttpResponseRedirect(reverse("index"))
+    form = PostForm()
+    user = get_object_or_404(User.objects.filter(pk=request.session['user_id']))
+
+    if request.method == "POST":
+        form = PostForm(request.POST)
+
+        # Attempt to create new listing
+        try:
+            post = Post()
+            post.user = user
+            post.post_id = post.pk
+            post.post_content = request.POST['postContent']
+            post.post_date = timezone.now()
+            post.save()
+        except IntegrityError:
+            context = {
+                'form': form,
+                'message': 'Error while saving post.',
+            }
+            return render(request, "network/posts.html", context=context)
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        posts = Post.objects.order_by('-post_date')
+
+    context= {
+        'form': form,
+        'userName': user.first_name + ' ' + user.last_name,
+        'userImage': user.user_image,
+        'posts': posts,
+    }
+    return render(request, "network/posts.html", context=context)
+
 
 def following(request):
     return HttpResponseRedirect(reverse("index"))

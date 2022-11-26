@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('#fileChooser').addEventListener('click', (e) => fileChooser());
-    document.querySelector('#registerImageFile').addEventListener('change', (e) => imageChange());
+    document.querySelector('#posts-view').addEventListener('change', (e) => viewPosts());
+    document.querySelector('#sendPost').addEventListener('click', send_post);
 
     document.onreadystatechange = () => {
         if (document.readyState === 'complete') {
@@ -13,23 +13,31 @@ document.addEventListener('DOMContentLoaded', function() {
 function loaded() {
 }
 
-function fileChooser(e) {
-    document.querySelector('#registerImageFile').click()
-}
+ function viewPosts() {
+     document.querySelector('#posts-view').style.display='block';
 
-function imageChange(e) {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-        const uploaded_image = reader.result;
-        imageFile = document.querySelector('#imageFile')
-        imageFile.src = `${uploaded_image}`;
 
-        registerImageFile = document.querySelector('#registerImageFile')
-        registerImageFile.src = `${uploaded_image}`;
 
-        document.querySelector('#imageFile').style.display = '';
-        document.querySelector('#defaultImageFile').style.display = 'none';
-    })
+ }
 
-    reader.readAsDataURL(document.querySelector('#registerImageFile').files[0]);
-}
+ function send_post() {
+
+  // Submit email and show sent mailbox
+  document.querySelector('form').onsubmit = function (){
+    const post_content = document.querySelector('#postContent').value;
+
+    if (post_content !== undefined & post_content !== '') {
+        fetch('/posts', {
+            method: 'POST',
+            body: JSON.stringify({
+                postContent: post_content,
+            })
+          })
+          .then(response => response.json())
+          .then(result => {
+              load_mailbox('sent')
+          });
+        } else {
+          alert('Please, inform the content of the post!')
+    }  
+ }

@@ -4,8 +4,6 @@ from attr import attrs
 from django import forms
 from django.conf import settings
 
-#from network.models import Post
-
 class RegisterForm(forms.Form):
     registerImageFile = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={
@@ -82,11 +80,18 @@ class RegisterForm(forms.Form):
 
 
 class PostForm(forms.Form):
+    postUserImage = forms.TextInput(
+
+    )
+    
     postContent = forms.CharField(
         widget=forms.Textarea(attrs={
-            'class': 'form-control form-control-sm',
+            'class': 'form-control form-control-sm post-text-area',
+            'id':'postContent',
             'rows': '3',
-            'columns': '100',
+            'cols': '100',
+            'margin-left': '20px',
+            'placeholder': 'What''s happening?',
         }),
         required=False,
     )
