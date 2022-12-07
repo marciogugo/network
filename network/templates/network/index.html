@@ -5,27 +5,67 @@
 <div class="form-posts">
     <h2 class="h2-header">All Posts</h2>
 
-    <form action="{% url 'posts' %}" method="POST" id="postForm" name="PostForm" enctype="multipart/form-data">
+    <div id="compose-post-view" style='display:none'>
+        <form action="{% url 'save_post' %}" method="POST" id="PostForm" name="PostForm" enctype="multipart/form-data">
         {% csrf_token %}
-
-        <div class="col-sm-10">
-            <label for="postContent" class="col-sm2 col-form-label col-form-label-sm">New Post</label>
-            {{ form.postContent }}
-        </div>
-
-        <div id="posts-view" style='display:none'>
-            <div class="row">
-                {% for post in posts %}
-                <div class="col-md-4">
-                    {% for item in post %}
-                        <div class="col-sm-10">
-                            <label for="postContent" class="col-sm2 col-form-label col-form-label-sm">Content:</label>
-                            {{ item.post_content }}
+            <div class="col-md-6 post-content">
+                {% if user.is_authenticated %}
+                    <div class="col-sm-10 post-header">
+                        <img class="rounded-circle" id="userImage" src="media/{{ user.user_image }}" width="54" height="54">
+                        <div class="post-username">
+                            {{ user.first_name }} {{ user.last_name }}
                         </div>
-                    {% endfor %}
-                </div>
-                {% empty %}
-                    <div class="error-message">Sorry, no posts found.</div>
+                    </div>
+
+                    <div class='post-content'>
+                        {{ form.postContent }}
+                    </div>
+
+                    <div class="post-bt-submit">
+                        <input class="btn btn-primary post-bt-thread" type="submit" value="Post">
+                    </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <div id="all-posts-view" style='display:none'>
+        <form action="{% url 'posts' %}" method="POST" id="ViewForm" name="ViewForm" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="column vl">
+                {% for post in posts %}
+                    {% if post.post_reply == null %}
+                        <div class="col-md-6 post-content">
+                            <div class="col-sm-10 post-header">
+                                <img class="rounded-circle" id="userImage" src="media/{{ post.user.user_image }}" width="54" height="54">
+                                <div class="post-username">
+                                    {{ post.user.full_name }} | {{ post.post_date }} 
+                                </div>
+                            </div>
+            
+                            <div class='post-content'>
+                                <textarea class="form-control form-control-sm post-text-area" id="post-content" rows="4" disabled="True">{{ post.post_content }}</textarea>
+                            </div>
+                            
+                            <div class="post-bt-edit">
+                                <button class="btn btn-outline-white post-bt-reply" type="button" id="button-reply" name="btn_reply"><span>&#x1F501;</span></button>
+                                
+                                {% comment %} {% if post.liked %} {% endcomment %}
+                                    <button class="btn btn-outline-white post-bt-like" type="button" id="button-like" name="btn_unliked"><span>&#x1F499;</span></button>
+                                {% comment %} {% else %} {% endcomment %}
+                                    <button class="btn btn-outline-white post-bt-like" type="button" id="button-unlike" name="btn_liked"><span>&#x1F90D;</span></button>
+                                {% comment %} {% endif %} {% endcomment %}
+
+                                {% comment %} {% if post.user.id == user.id %} {% endcomment %}
+                                <btn class="btn btn-primary post-bt-edit" id="button-edit">Edit</btn>
+                                {% comment %} {% endif %} {% endcomment %}
+                            </div>
+
+                            <div class="post-bt-reply" id="reply-post-view" name="reply{{ post.pk }}" style="display:none">
+                                    abriu para reply
+                            </div>
+                        </div> <!-- /col-md-6 -->
+                    {% endif %}
                 {% endfor %}
             </div>
             {% if message %}
@@ -33,8 +73,13 @@
             {% else %}
                 <div class="error-message"></div>
             {% endif %}
-            </div>
-    </form>
+        </form>
+    </div>
+
+    <div id="edit-post-view" style='display:none'>
+        edit post view
+    </div>
+
 </div>
 {% endblock %}
 

@@ -279,9 +279,23 @@ nav {
 }
 
 .post-text-area {
-    margin-left: 1px;
+    margin-left: 80px;
 }
 
-.post-bt-edit {
-    margin-left: 85px;
+.post-bt-thread {
+    margin-top: 10px;
+    margin-left: 80px;
 }
+
+.post-bt-reply {
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+.post-bt-submit,
+.post-bt-like,
+.post-bt-edit {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+

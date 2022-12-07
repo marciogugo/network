@@ -11,7 +11,14 @@ from .forms import PostForm, RegisterForm
 
 
 def index(request):
-    return render(request, "network/index.html")
+    form = PostForm()
+    posts = Post.objects.order_by('-post_date')
+
+    context= {
+        'form': form,
+        'posts': posts,
+    }
+    return render(request, "network/index.html", context=context)
 
 
 def login_view(request):
@@ -26,7 +33,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             request.session['user_id'] = user.pk
-            return HttpResponseRedirect(reverse("posts"))
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
@@ -92,9 +99,17 @@ def register(request):
     }
     return render(request, "network/register.html", context=context)
 
+def posts(request):
+    form = PostForm()
+    posts = Post.objects.order_by('-post_date')
+    context= {
+        'form': form,
+        'posts': posts,
+    }
+    return render(request, "network/index.html", context=context)
 
 @login_required
-def posts(request):
+def save_post(request):
     form = PostForm()
     user = get_object_or_404(User.objects.filter(pk=request.session['user_id']))
 
@@ -114,7 +129,7 @@ def posts(request):
                 'form': form,
                 'message': 'Error while saving post.',
             }
-            return render(request, "network/posts.html", context=context)
+            return render(request, "network/index.html", context=context)
         return HttpResponseRedirect(reverse("index"))
     else:
         posts = Post.objects.order_by('-post_date')
@@ -123,10 +138,14 @@ def posts(request):
         'form': form,
         'userName': user.first_name + ' ' + user.last_name,
         'userImage': user.user_image,
-        'posts': posts,
     }
-    return render(request, "network/posts.html", context=context)
+    return render(request, "network/index.html", context=context)
 
 
+@login_required
+def like_post(request):
+    return HttpResponseRedirect(reverse("index"))
+
+@login_required
 def following(request):
     return HttpResponseRedirect(reverse("index"))

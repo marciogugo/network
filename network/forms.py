@@ -80,18 +80,27 @@ class RegisterForm(forms.Form):
 
 
 class PostForm(forms.Form):
-    postUserImage = forms.TextInput(
-
-    )
-    
     postContent = forms.CharField(
         widget=forms.Textarea(attrs={
             'class': 'form-control form-control-sm post-text-area',
             'id':'postContent',
-            'rows': '3',
+            'rows': '4',
             'cols': '100',
             'margin-left': '20px',
             'placeholder': 'What''s happening?',
         }),
         required=False,
     )
+
+
+# class ViewForm(forms.Form):
+#     postContent = forms.CharField(
+#         widget=forms.Textarea(attrs={
+#             'class': 'form-control form-control-sm post-text-area',
+#             'id':'viewContent',
+#             'rows': '4',
+#             'cols': '100',
+#             'placeholder': 'What''s happening?',
+#         }),
+#         required=False,
+#     )
