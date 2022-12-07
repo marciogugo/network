@@ -48,7 +48,7 @@
                             </div>
                             
                             <div class="post-bt-edit">
-                                <button class="btn btn-outline-white post-bt-reply" type="button" id="button-reply" name="btn_reply"><span>&#x1F501;</span></button>
+                                <button class="btn btn-outline-white post-bt-reply" type="button" id="button-reply{{ post.pk }}" name="btn_reply_{{ post.pk }}"><span>&#x1F501;</span></button>
                                 
                                 {% comment %} {% if post.liked %} {% endcomment %}
                                     <button class="btn btn-outline-white post-bt-like" type="button" id="button-like" name="btn_unliked"><span>&#x1F499;</span></button>
@@ -61,7 +61,7 @@
                                 {% comment %} {% endif %} {% endcomment %}
                             </div>
 
-                            <div class="post-bt-reply" id="reply-post-view" name="reply{{ post.pk }}" style="display:none">
+                            <div class="post-bt-reply" id="reply-post-view" name="post-bt-reply-{{ post.pk }}" style="display:noneeee">
                                     abriu para reply
                             </div>
                         </div> <!-- /col-md-6 -->
