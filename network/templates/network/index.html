@@ -66,14 +66,17 @@
                                     {% endif %}
                                 </div>
 
-                                <div class="post-bt-reply" id="reply-post-view" name="post-bt-reply-{{ post.pk }}" style="display:none">
-                                    <div class='post-content'>
-                                        <textarea class="form-control form-control-sm post-text-area" id="post-content" name="post-text-area-{{ post.pk }}" rows="4" placeholder="Text your reply here..."></textarea>
-                                        <div class="reply-bt-submit">
-                                            <input class="btn btn-primary post-bt-thread" type="submit" value="Post">
+                                <form action="{% url 'reply_post' %}" method="POST" id="ReplyForm" name="PostForm" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="post-bt-reply" id="reply-post-view" name="post-bt-reply-{{ post.pk }}" style="display:none">
+                                        <div class='post-content'>
+                                            <textarea class="form-control form-control-sm post-text-area" id="post-content" name="post-text-area-{{ post.pk }}" rows="4" placeholder="Text your reply here..."></textarea>
+                                            <div class="reply-bt-submit">
+                                                <input class="btn btn-primary post-bt-thread" type="submit" name="submit-reply-{{ post.pk }}" value="Post">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             {% endif %}
                         </div> <!-- /col-md-6 -->
                     {% endif %}

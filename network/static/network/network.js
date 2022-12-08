@@ -42,11 +42,12 @@ function reply_post() {
 
         for (let i = 0; i <= elements.length; i++) {
             var currElement = elements[i].getAttribute('name').replace(/\D/g,'') 
+            var element = elements[i];
 
             if (id == currElement) {
-                elements[i].style.display='block';
+                element.style.display='block';
             } else {
-                elements[i].style.display='none';
+                element.style.display='none';
             }
         }
     }

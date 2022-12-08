@@ -145,8 +145,14 @@ def save_post(request):
 
 
 @login_required
+def reply_post(request):
+    return HttpResponseRedirect(reverse("index"))
+
+
+@login_required
 def like_post(request):
     return HttpResponseRedirect(reverse("index"))
+
 
 @login_required
 def following(request):
