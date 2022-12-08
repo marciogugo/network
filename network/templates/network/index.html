@@ -47,23 +47,34 @@
                                 <textarea class="form-control form-control-sm post-text-area" id="post-content" rows="4" disabled="True">{{ post.post_content }}</textarea>
                             </div>
                             
-                            <div class="post-bt-edit">
-                                <button class="btn btn-outline-white post-bt-reply" type="button" id="button-reply{{ post.pk }}" name="btn_reply_{{ post.pk }}"><span>&#x1F501;</span></button>
-                                
-                                {% comment %} {% if post.liked %} {% endcomment %}
-                                    <button class="btn btn-outline-white post-bt-like" type="button" id="button-like" name="btn_unliked"><span>&#x1F499;</span></button>
-                                {% comment %} {% else %} {% endcomment %}
-                                    <button class="btn btn-outline-white post-bt-like" type="button" id="button-unlike" name="btn_liked"><span>&#x1F90D;</span></button>
-                                {% comment %} {% endif %} {% endcomment %}
+                            {% if user.is_authenticated %} 
+                                <div class="post-bt-edit">
+                                    <button class="btn btn-outline-white post-bt-reply" type="button" id="button-reply{{ post.pk }}" name="btn_reply_{{ post.pk }}"><span>&#x1F501;</span></button>
+                                    
+                                    {% for like in likes %}
+                                        {% if post.pk == like.post_id %}
+                                            <button class="btn btn-outline-white post-bt-like" type="button" id="button-like" name="btn_liked"><span>&#x1F499;</span></button>
+                                        {% else %}
+                                            <button class="btn btn-outline-white post-bt-like" type="button" id="button-like" name="btn_unliked"><span>&#x1F90D;</span></button>
+                                        {% endif %}
+                                    {% empty %}
+                                        <button class="btn btn-outline-white post-bt-like" type="button" id="button-like" name="btn_unliked"><span>&#x1F90D;</span></button>
+                                    {% endfor %}
 
-                                {% comment %} {% if post.user.id == user.id %} {% endcomment %}
-                                <btn class="btn btn-primary post-bt-edit" id="button-edit">Edit</btn>
-                                {% comment %} {% endif %} {% endcomment %}
-                            </div>
+                                    {%if post.user.id == user.id %}
+                                        <btn class="btn btn-primary post-bt-edit" id="button-edit">Edit</btn>
+                                    {% endif %}
+                                </div>
 
-                            <div class="post-bt-reply" id="reply-post-view" name="post-bt-reply-{{ post.pk }}" style="display:noneeee">
-                                    abriu para reply
-                            </div>
+                                <div class="post-bt-reply" id="reply-post-view" name="post-bt-reply-{{ post.pk }}" style="display:none">
+                                    <div class='post-content'>
+                                        <textarea class="form-control form-control-sm post-text-area" id="post-content" name="post-text-area-{{ post.pk }}" rows="4" placeholder="Text your reply here..."></textarea>
+                                        <div class="reply-bt-submit">
+                                            <input class="btn btn-primary post-bt-thread" type="submit" value="Post">
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div> <!-- /col-md-6 -->
                     {% endif %}
                 {% endfor %}

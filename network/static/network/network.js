@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#all-posts-view').addEventListener('change', (e) => viewPosts());
     document.querySelector('#button-like').addEventListener('click', () => like_post());
-    document.querySelector('#button-unlike').addEventListener('click', () => unlike_post());
+    // document.querySelector('#button-unlike').addEventListener('click', () => unlike_post());
     document.querySelector('#button-edit').addEventListener('click', () => edit_post());
-//    document.querySelector('#button-reply').addEventListener('click', () => reply_post());
-    document.querySelectorAll('div.post-bt-reply').addEventListener('click', () => reply_post());
+    document.querySelector('.post-bt-reply').addEventListener('click', () => reply_post());
+
+    const cbox = document.querySelectorAll(".post-bt-reply");
+
+    for (let i = 0; i < cbox.length; i++) {
+            cbox[i].addEventListener("click", () => reply_post());
+    }
 
     document.onreadystatechange = () => {
         if (document.readyState === 'complete') {
@@ -27,14 +32,23 @@ function edit_post(id) {
 
 
 function reply_post() {
+    document.querySelector('#all-posts-view').style.display='block';
+    document.querySelector('#edit-post-view').style.display='none';
+
     const id = document.activeElement.getAttribute('name').replace(/\D/g,''); //only numbers
 
     if (id != null) {
-        alert(id);
-        document.querySelector('#compose-post-view').style.display = 'none';
-        document.querySelector('#all-posts-view').style.display='block';
-        document.querySelector('#edit-post-view').style.display='none';
-        document.getElementById('post-bt-reply-'||id).style.display='block';
+        let elements = document.querySelectorAll('div.post-bt-reply');
+
+        for (let i = 0; i <= elements.length; i++) {
+            var currElement = elements[i].getAttribute('name').replace(/\D/g,'') 
+
+            if (id == currElement) {
+                elements[i].style.display='block';
+            } else {
+                elements[i].style.display='none';
+            }
+        }
     }
   }
 
@@ -53,7 +67,6 @@ function viewPosts() {
   document.querySelector('#all-posts-view').style.display='block';
   document.querySelector('#edit-post-view').style.display='none';
   document.querySelector('#reply-post-view').style.display='none';
-
 }
 
  function send_post() {

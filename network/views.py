@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import User, Post
+from .models import User, Post, Likes
 from .forms import PostForm, RegisterForm
 
 
@@ -102,9 +102,11 @@ def register(request):
 def posts(request):
     form = PostForm()
     posts = Post.objects.order_by('-post_date')
+    likes = Likes.objects.all()
     context= {
         'form': form,
         'posts': posts,
+        'likes': likes,
     }
     return render(request, "network/index.html", context=context)
 
